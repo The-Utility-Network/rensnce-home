@@ -61,7 +61,7 @@ export default async function Image() {
                     <div style={{ position: 'absolute', inset: 0, border: '2px solid rgba(255,255,255,0.1)', borderRight: 'none', borderRadius: '40px 0 0 40px' }} />
 
                     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', zIndex: '10' }}>
-                        <div style={{ fontSize: 40, fontWeight: 700, color: 'white', lineHeight: 1.2, textAlign: 'right', textShadow: '0 4px 30_0px rgba(0,0,0,0.9)' }}>
+                        <div style={{ fontSize: 40, fontWeight: 700, color: 'white', lineHeight: 1.2, textAlign: 'right', textShadow: '0 4px 30px rgba(0,0,0,0.9)' }}>
                             “The ballot is stronger than the bullet.”
                         </div>
                         <div style={{
