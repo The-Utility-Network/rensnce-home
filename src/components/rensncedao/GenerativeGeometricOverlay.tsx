@@ -30,8 +30,13 @@ export default function GenerativeGeometricOverlay({ className = '' }: Component
         let animationFrameId: number;
 
         const nodes: Node[] = [];
-        const nodeCount = Math.floor((width * height) / 15000); // Density based on screen size
-        const connectionDistance = 150;
+        const isMobile = width < 768;
+        // Reduce density: Divide area by larger number = fewer nodes
+        const rawNodeCount = Math.floor((width * height) / 25000);
+        // Hard cap node count to prevent exponential slowdown on huge screens
+        const nodeCount = Math.min(rawNodeCount, isMobile ? 40 : 80);
+
+        const connectionDistance = isMobile ? 100 : 150;
         const speed = 0.3;
 
         // Initialize nodes

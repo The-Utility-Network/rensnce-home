@@ -164,7 +164,7 @@ export default function TransparentVideo({ src, className, forceWhite = false }:
 
         const handleResize = () => {
             // Match canvas size to container size * pixel ratio
-            const dpr = window.devicePixelRatio || 1;
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
             const rect = container.getBoundingClientRect();
             canvas.width = rect.width * dpr;
             canvas.height = rect.height * dpr;
