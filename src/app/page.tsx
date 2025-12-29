@@ -21,8 +21,8 @@ export default function Home() {
           className="object-cover opacity-40"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
-        <GenerativeGeometricOverlay className="opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/90" />
+        <GenerativeGeometricOverlay className="opacity-30" />
       </div>
 
       <div className="relative z-10">

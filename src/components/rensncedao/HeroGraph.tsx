@@ -50,7 +50,9 @@ export default function HeroGraph() {
                 // We ignore the top-half color because it seems to produce black artifacts for the dot.
                 // Since the desired look is "White/Silver" lines, we just use White (1.0) * Alpha.
                 
-                gl_FragColor = vec4(1.0, 1.0, 1.0, alphaMask.r);
+                float alpha = alphaMask.r;
+                if (alpha < 0.05) alpha = 0.0; // Clear low-level noise
+                gl_FragColor = vec4(1.0, 1.0, 1.0, alpha);
             }
         `;
 
@@ -158,6 +160,11 @@ export default function HeroGraph() {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
+        // Enable alpha blending
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+
         // Ensure Video Plays
         video.play().catch(e => console.error(e));
 
@@ -167,7 +174,7 @@ export default function HeroGraph() {
 
         // Resize Handler
         const handleResize = () => {
-            const dpr = window.devicePixelRatio || 1;
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
             canvas.width = window.innerWidth * dpr;
             canvas.height = window.innerHeight * dpr;
 
@@ -241,10 +248,10 @@ export default function HeroGraph() {
                 crossOrigin="anonymous" // Important if hosted externally, effectively ignored for local but good practice
             />
 
-            {/* WebGL Canvas - Normal blend to allow transparency to work naturally over black background */}
+            {/* WebGL Canvas - Normal blend */}
             <canvas
                 ref={canvasRef}
-                className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-90"
+                className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
 
             {/* Overlay gradient */}
